@@ -1,22 +1,45 @@
 <template>
   <div id="app">
-     <router-view></router-view>
+    <div class="home-loading" :class="{ 'home-loading-active': turnLoadingFlag }" v-if="isLoading">
+      <img :src="require(`assets/images/${turnLoadingFlag? 'logo.png':'wLogo.png'}`)" alt class="logo" />
+    </div>
+    <template v-else>
+      <router-view ></router-view>
+    </template>
   </div>
 </template>
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  data() {
+    return {
+      isLoading: true,
+      turnLoadingFlag: false
+    }
+  },
+  created() {
+    setTimeout(() => {
+      this.turnLoadingFlag = true;
+    }, 700);
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2100);
+  }
 };
 </script>
-
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+   font-family: 'zhanghaishan', "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
 }
 .icon {
   width: 1em;
@@ -24,5 +47,22 @@ export default {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+.home-loading{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  height: 100vh;
+  background-color: #ffffff;
+  transition: background-color 0.7s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-loading-active {
+  background-color: #2a282a;
 }
 </style>
