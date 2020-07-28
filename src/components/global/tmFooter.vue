@@ -48,12 +48,13 @@ export default {
     align-items: center;
     padding: 10px;
     justify-content: space-between;
-    background: #dddddd;
+    background: #F3F3F3;
     li{
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      border: 1px solid #cccccc;
+      border: 1px solid #999999;
+      color: #999999;
       display: flex;
       align-items: center;
       justify-content: center
@@ -62,6 +63,7 @@ export default {
   .tm-address{
     font-size: 10px;
     padding: 10px 0;
+    color: #999999;
   }
 }
 </style>
