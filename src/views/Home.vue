@@ -79,12 +79,15 @@ export default {
   z-index: 1;
 }
 .home-content{
-  position: absolute;
-  top: 60px;
-  bottom: 104px;
-  left: 0;
-  right: 0;
-  z-index: 1;
+  // position: absolute;
+  // top: 60px;
+  // bottom: 104px;
+  // left: 0;
+  // right: 0;
+  // z-index: 1;
+  width: 100%;
+  height: 78%;
+  margin-top: 60px;
   overflow-y: auto;
   .swiper-container{
     width: 100%;

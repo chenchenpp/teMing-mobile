@@ -50,14 +50,14 @@ export default {
         }]
       },{
         name: '品牌故事',
-        path: '',
-        childrenList: [{
-          name: '产品特色',
-          path: ''
-        },{
-          name: '五心服务',
-          path: ''
-        }]
+        path: 'brandStory',
+        // childrenList: [{
+        //   name: '产品特色',
+        //   path: ''
+        // },{
+        //   name: '五心服务',
+        //   path: ''
+        // }]
       },{
         name: '特铭展厅',
         path: '',

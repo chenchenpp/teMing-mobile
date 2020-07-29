@@ -37,8 +37,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .footer{
-  position: fixed;
-  bottom: 0;
+  // position: fixed;
+  // bottom: 0;
   padding: 0 20px;
   padding-top: 10px;
   width: 100%;
