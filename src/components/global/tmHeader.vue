@@ -1,10 +1,10 @@
 <template>
   <div class="header-main">
-    <div class="header">
+    <div class="header" ref="headerRef">
       <img :src="require('@/assets/images/wLogo.png')" alt="">
       <i class="iconfont" :class="[menuIcon]" @click="openMenuHandle"></i>
     </div>
-    <div class="menu-content" :class="{'menu-active': isMenu}">
+    <div class="menu-content" ref="menuContentRef">
       <cube-scroll
         ref="scroll"
         :data="menuList"
@@ -12,65 +12,100 @@
         class="horizontal-scroll-list-wrap">
         <ul class="list-wrapper">
           <li v-for="(item, index) in menuList" :key="index" class="list-item">
-            <div class="father-name" v-if="item.childrenList&&item.childrenList.length">{{item.name}}</div>
-            <router-link class="father-name" v-else :to="`/${item.path}`">{{item.name}}</router-link>
+            <div class="father-name" v-if="item.childrenList&&item.childrenList.length">{{item[`name${language}`]}}</div>
+            <router-link class="father-name" v-else :to="`/${item.path}`">{{item[`name${language}`]}}</router-link>
             <ul class="child-items">
               <li v-for="(data, childIndex) in item.childrenList" :key="childIndex" @click="goRouter(item, data)">
-                {{data.name}}
+                {{data[`name${language}`]}}
               </li>
             </ul>
           </li>
         </ul>
       </cube-scroll>
       <div class="turn-trans">
-        <span class="china">CN</span> |
-        <span class="english">EN</span>
+        <span class="china" :class="{'active': language=='CN'}" @click="changeLoacle('CN')">CN</span> |
+        <span class="english" :class="{'active': language=='EN'}" @click="changeLoacle('EN')">EN</span>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import {getClientHeight} from '@/util/publicMethod'
 export default {
   name: 'tm-header',
   data(){
     return {
       menuList: [{
         name: '首页',
+        nameEnglish: 'home',
         path: 'home'
       },{
         name: '产品中心',
+        nameEnglish: 'Product Center',
         path: 'product',
         childrenList: [{
           name: '贾德系列',
+          nameEnglish: 'Judd Series',
           path: 'jiade'
         },{
           name: '莫兰迪系列',
+          nameEnglish: 'Morandi series',
           path: 'molandi'
+        },{
+          name: '密斯系列',
+          nameEnglish: 'miss series',
+          path: 'miss'
+        },{
+          name: '迪克森系列',
+          nameEnglish: 'dikesen series',
+          path: 'dikesen'
+        },{
+          name: '比尔系列',
+          nameEnglish: 'bier series',
+          path: 'bier'
+        },{
+          name: '克特林系列',
+          nameEnglish: 'kelinte series',
+          path: 'kelinte'
+        },{
+          name: '波提切利系列',
+          nameEnglish: 'botiqieli series',
+          path: 'botiqieli'
+        },{
+          name: '蒙德里安系列',
+          nameEnglish: 'mengdelian series',
+          path: 'mengdelian'
         }]
       },{
         name: '品牌故事',
-        path: 'brandStory',
-        // childrenList: [{
-        //   name: '产品特色',
-        //   path: ''
-        // },{
-        //   name: '五心服务',
-        //   path: ''
-        // }]
+        nameEnglish: 'Brand story',
+        path: '',
+        childrenList: [{
+          name: '产品特色',
+          nameEnglish: 'Product features',
+          path: 'brandStory'
+        },{
+          name: '五心服务',
+          nameEnglish: 'Five heart service',
+          path: 'brandStory'
+        }]
       },{
         name: '特铭展厅',
+        nameEnglish: 'exhibition hall',
         path: '',
         childrenList: [{
           name:'上海展厅',
-          paht: ''
+          nameEnglish: 'Shanghai Exhibition Hall',
+          path: 'exploreHall'
         }]
       },{
         name: '加入我们',
+        nameEnglish: 'Join us',
         path: '',
         childrenList: [{
           name: '企业入驻',
-          path: ''
+          nameEnglish: 'Enterprise settlement',
+          path: 'joinUs'
         }]
       }],
       isMenu: false,
@@ -79,15 +114,29 @@ export default {
   computed: {
     menuIcon(){
       return this.isMenu? 'iconfork':'iconego-menu'
-    }
+    },
   },
   methods: {
     openMenuHandle(){
-      console.log('打开菜单')
       this.isMenu=!this.isMenu;
+      if(this.isMenu){
+        // 获取当前视口高度
+        let headerHeight=this.$refs.headerRef.clientHeight;
+        let ClientHeight=getClientHeight();
+        this.$refs.menuContentRef.style.height=(ClientHeight-headerHeight)+'px';
+      }else{
+        this.$refs.menuContentRef.style.height=""
+      }
+
     },
     goRouter(item, data){
-      this.$router.push(`/${item.path}/${data.path}`)
+      let path=item.path?`/${item.path}/${data.path}`:`/${data.path}`;
+      this.$router.push(path)
+
+    },
+    changeLoacle(lang){
+      sessionStorage.setItem('locale', lang);
+      this.$EventBus.$emit('locale', lang);
     }
   }
 };
@@ -95,6 +144,7 @@ export default {
 <style scoped lang="scss">
 .header-main{
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
   min-height: 60px;
@@ -107,7 +157,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 0 10px;
+  padding: 0 20px;
   img{
     height: 30px;
   }
@@ -163,9 +213,6 @@ export default {
       color: #333333;
     }
   }
-}
-.menu-active{
-  height: calc(100vh - 120px);
 }
 
 </style>

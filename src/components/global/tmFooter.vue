@@ -5,9 +5,7 @@
         <i class="iconfont" :class="[data.iconfont]"></i>
       </li>
     </ul>
-    <p class="tm-address">
-      Copyright @2010 - 2020上海特铭家具有限公司  沪ICP备19034031号-1
-    </p>
+    <p class="tm-address">{{address[`info${language}`]}}</p>
   </div>
 </template>
 <script>
@@ -15,6 +13,10 @@ export default {
   name:'tm-footer',
   data(){
     return {
+      address: {
+        info: 'Copyright @2010 - 2020上海特铭家具有限公司  沪ICP备19034031号-1',
+        infoEnglish: 'Copyright @ 2010-2020 Shanghai TeMing Furniture Co., Ltd. huicp No. 19034031-1',
+      },
       contactList: [{
         name: 'qq',
         iconfont: 'iconqq1'
@@ -37,10 +39,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .footer{
-  // position: fixed;
-  // bottom: 0;
   padding: 0 20px;
-  padding-top: 10px;
+  margin-top: 40px;
   width: 100%;
   box-sizing: border-box;
   .contact-items{
@@ -64,6 +64,7 @@ export default {
     font-size: 10px;
     padding: 10px 0;
     color: #999999;
+    line-height:12px;
   }
 }
 </style>

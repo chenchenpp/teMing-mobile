@@ -4,8 +4,8 @@
     <div class="home-content">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div v-for="el in carousolList" class="swiper-slide" :key="el.imgsrc">
-            <img :src="require(`@/assets/images/home/${el.imgsrc}`)" alt />
+          <div v-for="(el, index) in carousolList" class="swiper-slide" :key="index">
+            <img :src="el.imageUrl" alt />
           </div>
         </div>
         <!-- 如果需要分页器 -->
@@ -15,10 +15,9 @@
     <tm-footer></tm-footer>
   </div>
 </template>
-
 <script>
 import Swiper from "swiper";
-import { getUserComTravelersByUserId } from '@/util/request/api.js';
+import api from '@/util/request/api';
 export default {
   name: 'home',
   data(){
@@ -42,20 +41,30 @@ export default {
     }
   },
   created(){
-    console.log(Swiper)
-    this.$nextTick(() => {
-      this.initSwiper();
-    })
-
+    this.init();
   },
   methods: {
+    init() {
+      this.$get(api.getPageHttp, {
+        imageBelongPage: 15,
+        en: 0
+      }).then(res => {
+        this.carousolList=res.arrList[0].imgArr
+        // 初始化轮播图
+        this.$nextTick(() => {
+          this.initSwiper();
+        });
+      });
+    },
     initSwiper() {
       let homeSwiper = new Swiper(".swiper-container", {
         autoplay: 3000,
         loop: true,
         speed: 1000, // 切换速度，slider自动滑动开始到结束的时间单位ms，也是触摸滑动时释放至贴合的时间。
-        // effect: "fade",
-        pagination : '.swiper-pagination'
+        pagination : '.swiper-pagination',
+        lazyLoading : true,
+        lazyLoadingInPrevNext : true,
+        lazyLoadingOnTransitionStart : true,
       });
     },
     // clickHttp() {
@@ -76,19 +85,11 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  overflow-y: auto;
 }
 .home-content{
-  // position: absolute;
-  // top: 60px;
-  // bottom: 104px;
-  // left: 0;
-  // right: 0;
-  // z-index: 1;
   width: 100%;
-  height: 78%;
   margin-top: 60px;
-  overflow-y: auto;
   .swiper-container{
     width: 100%;
     height: 100%;
@@ -96,7 +97,6 @@ export default {
   img{
     width: 100%;
     height: 100%;
-    object-fit: cover
   }
   ::v-deep .swiper-pagination-bullet{
     width: 25px;
@@ -108,5 +108,8 @@ export default {
   ::v-deep .swiper-pagination-bullet-active{
     opacity: 1;
   }
+}
+.footer{
+  margin-top: 20px;
 }
 </style>

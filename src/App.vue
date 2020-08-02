@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="home-loading" :class="{ 'home-loading-active': turnLoadingFlag }" v-if="isLoading">
-      <img :src="require(`assets/images/${turnLoadingFlag? 'logo.png':'wLogo.png'}`)" alt class="logo" />
+      <img :src="require(`assets/images/${turnLoadingFlag? 'wLogo.png':'logo.png'}`)" alt class="logo" />
     </div>
     <template v-else>
       <router-view ></router-view>
@@ -29,17 +29,19 @@ export default {
 </script>
 <style>
 #app {
-   font-family: 'zhanghaishan', "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'zhanghaishan', "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  position: absolute;
+  /* position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0; */
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 .icon {
   width: 1em;
@@ -56,13 +58,13 @@ export default {
   bottom: 0;
   z-index: 1000;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: #2a282a;
   transition: background-color 0.7s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .home-loading-active {
-  background-color: #2a282a;
+  background-color: #ffffff;
 }
 </style>

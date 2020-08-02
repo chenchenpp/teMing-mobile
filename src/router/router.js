@@ -10,7 +10,7 @@ function importAll(routerArr) {
 importAll(require.context('.', true, /\.router\.js/));
 export default new Router({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: '/msite/',
   routes: [
     {
       path: '/',

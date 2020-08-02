@@ -13,26 +13,28 @@
         >></video-player>
       </div>
       <div class="characteristic">
-        <h2 class="title">特铭 · 产品特色</h2>
-        <p class="des">每一个细节都达到美感和品质的高度统一</p>
-        <img class="cha-banner" :src="require('@/assets/images/brandStory/forth-content-img1.png')" alt="">
+        <h2 class="title">{{pointsList.title}}</h2>
+        <p class="des">{{pointsList.info}}</p>
+        <img class="cha-banner" :src="pointsList.imgArr&&pointsList.imgArr[0].imageUrl" alt="">
         <ul class="point-items">
-          <li v-for="(item, index) in pointsList" :key="index">
-            <h2 class="name">{{item.title}}</h2>
-            <p class="subtitle">{{item.des}}</p>
-          </li>
+          <template v-for="(item, index) in pointsList.imgArr">
+            <li v-if="index>0" :key="index">
+              <h2 class="name">{{item.imageDescTitle}}</h2>
+              <p class="subtitle">{{item.imageDescription}}</p>
+            </li>
+          </template>
         </ul>
       </div>
       <div class="customized">
-        <h2 class="title">深度定制 · 五心服务</h2>
-        <p class="des">提供贯穿客户从始至终的深度维护</p>
+        <h2 class="title">{{customizedList.title}}</h2>
+        <p class="des">{{customizedList.info}}</p>
         <ul class="items">
-          <li v-for="(item, index) in customizedList" :key="index">
+          <li v-for="(item, index) in customizedList.imgArr" :key="index">
             <div class="banner-box">
-              <img :src="require(`@/assets/images/brandStory/${item.imgSrc}`)" alt="">
-              <span class="title">{{item.title}}</span>
+              <img :src="item.imageUrl" alt="">
+              <span class="title">{{item.mainTitle}}</span>
             </div>
-            <p class="des">{{item.des}}</p>
+            <p class="des">{{item.imageDescription}}</p>
           </li>
         </ul>
       </div>
@@ -41,15 +43,19 @@
   </div>
 </template>
 <script>
+import ScrollReveal from 'scrollreveal'
+import ScrollRevealCofig from '@/util/scrollReveal.config'
+import api from '@/util/request/api';
 export default {
   data(){
     return {
+      scrollRevealDom: '.banner-box .title,.brandStory-main .customized .title, .brandStory-main .customized .des,.brandStory-main .characteristic .title, .brandStory-main .characteristic .des,.brandStory-main .content img,.characteristic .name,.characteristic .subtitle',
       playerOptions: {
         height: "450px",
         playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
-        autoplay: true, //如果true,浏览器准备好时开始回放。
+        autoplay: false, //如果true,浏览器准备好时开始回放。
         muted: true, // 默认情况下将会消除任何音频。
-        loop: true, // 导致视频一结束就重新开始。
+        loop: false, // 导致视频一结束就重新开始。
         preload: "auto", // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
         language: "zh-CN",
         // aspectRatio: "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
@@ -100,7 +106,23 @@ export default {
       }]
     }
   },
+  mounted(){
+    this.init();
+  },
   methods:{
+    init() {
+      this.$get(api.getPageHttp, {
+        imageBelongPage: 17,
+        en: 0
+      }).then(res => {
+        this.pointsList=res.arrList[0];
+        this.customizedList=res.arrList[1];
+        // 初始化轮播图
+        this.$nextTick(() => {
+          ScrollReveal().reveal(this.scrollRevealDom, ScrollRevealCofig);
+        });
+      });
+    },
     onPlayerPlay(e) {
       this.$refs.videoPlayer.player.options_.muted = false;
     },
@@ -110,12 +132,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .brandStory-main{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow-y: auto;
+  // position: absolute;
+  // top: 0;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
+  // overflow-y: auto;
   .content{
     // position: absolute;
     // top: 60px;
@@ -182,7 +204,7 @@ export default {
           width:50%;
           height:35px;
           display: inline-block;
-          background: #ffffff;
+          background: linear-gradient(rgba($color: #ffffff, $alpha: .5),#ffffff, #ffffff);
           line-height: 35px;
           text-align: center;
           font-size:17px;

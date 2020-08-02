@@ -3,13 +3,14 @@ const productionGzipExtensions = ['js', 'css'];
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const server = {
-  target: 'http://172.16.16.8', // .8开发环境  .11 测试环境
-  secure: false
+  target: "http://106.52.5.152:8080",
+  secure: false,
 };
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
 module.exports = {
+  publicPath: '/msite/',
   css: {
     loaderOptions: {
       sass: {
@@ -26,7 +27,22 @@ module.exports = {
 
   devServer: {
     proxy: {
-      '/user_api': {
+      '/static_img': {
+        target: server.target,
+        changeOrigin: true,
+        secure: server.secure
+      },
+      '/image': {
+        target: server.target,
+        changeOrigin: true,
+        secure: server.secure
+      },
+      '/join': {
+        target: server.target,
+        changeOrigin: true,
+        secure: server.secure
+      },
+      '/disc': {
         target: server.target,
         changeOrigin: true,
         secure: server.secure
@@ -59,7 +75,7 @@ module.exports = {
       };
     };
     config.plugins.push(new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: [path.resolve(__dirname, 'dist')]
+      cleanOnceBeforeBuildPatterns: [path.resolve(__dirname, 'msite')]
     }));
   },
 
