@@ -3,7 +3,10 @@
     <tm-header></tm-header>
     <div class="content">
       <div class="area-explore-item" v-for="(item, index) in exploreHallList" :key="index">
-        <img class="explore-banner" :src="item.imageUrl" alt="">
+        <div class="explore-box">
+          <img class="explore-banner" :src="item.imageUrl" alt="">
+          <a class="enter-explore" :href="item.linkUrl"></a>
+        </div>
         <p class="title">{{item.imageDescTitle}}</p>
         <p class="dress" v-html="item.imageDescription"></p>
       </div>
@@ -19,17 +22,7 @@ export default {
   data(){
     return {
       scrollRevealDom:".area-explore-item img,.area-explore-item .title,.area-explore-item .dress",
-      exploreHallList: [{
-        imgSrc: 'hall1.jpg',
-        title: '上海 · 旗舰展厅',
-        dress: '上海市徐汇区宜山路439号七建大厦1楼',
-        phone: '(021)51505231'
-      },{
-        imgSrc: 'hall2.jpg',
-        title: '宁波 · 展厅',
-        dress: '上海市徐汇区宜山路439号七建大厦1楼 ',
-        phone: '(021)51505231'
-      }]
+      exploreHallList: []
     }
   },
   mounted(){
@@ -41,7 +34,6 @@ export default {
         imageBelongPage: 18,
         en: 0
       }).then(res => {
-        console.log(res)
         this.exploreHallList=res.arrList[0].imgArr;
         // 初始化轮播图
         this.$nextTick(() => {
@@ -70,6 +62,21 @@ export default {
   .area-explore-item:not(:first-child){
     margin-top: 40px
   }
+  .explore-box{
+    position: relative;
+    img{
+      display: block
+    }
+    .enter-explore{
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 80px;
+      height: 22px;
+      background: url('../assets/images/explorationHall/enterExplore.png') no-repeat center;
+      background-size: 100%;
+    }
+  }
   .explore-banner{
     width: 100%
   }
@@ -77,7 +84,8 @@ export default {
     margin-top: 20px;
     font-size: 17px;
     font-weight: bold;
-    color: #333333
+    color: #333333;
+    text-align: left
   }
   .dress{
     margin-top: 20px

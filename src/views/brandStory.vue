@@ -32,7 +32,7 @@
           <li v-for="(item, index) in customizedList.imgArr" :key="index">
             <div class="banner-box">
               <img :src="item.imageUrl" alt="">
-              <span class="title">{{item.mainTitle}}</span>
+              <span class="title">{{item.imageDescTitle}}</span>
             </div>
             <p class="des">{{item.imageDescription}}</p>
           </li>
@@ -67,43 +67,8 @@ export default {
           }
         ]
       },
-      pointsList: [{
-        title: '深度定制',
-        des: '每一款特铭家居都是独一无二，量身定制的'
-      },{
-        title: '工匠精神',
-        des: '大到门板，小到门条，每一块板材，都会经过专业师傅们细心的手工打磨'
-      },{
-        title: '精益求精',
-        des: '能与使用者达到默契配合的产品，才是一款好产品'
-      },{
-        title: '创意设计',
-        des: '时尚经典的设计、对细节的执着与无懈可击的质量是特铭一直的追求和坚持'
-      },{
-        title: '安心放心',
-        des: '全部信息数据都会被永久存档保留，并且每位用户都享受特铭终身服务'
-      }],
-      customizedList: [{
-        imgSrc: 'forth-content-img1.png',
-        title: '贴心 · 家居设计服务',
-        des: '根据客户房屋结构、装修风格、个人偏好等，提供深度的家居设计服务'
-      },{
-        imgSrc: 'forth-content-img1.png',
-        title: '匠心 · 柔性生产服务',
-        des: '根据定制方案和客户个性化特殊需求，一对一定制生产高端/高品质/高弹性的家具产品'
-      },{
-        imgSrc: 'forth-content-img1.png',
-        title: '舒心 · 代购齐套服务',
-        des: '提供非柜体家居产品的建议，找样和代购服务。'
-      },{
-        imgSrc: 'forth-content-img1.png',
-        title: '放心 · 完美交付服务',
-        des: '根据定制设计，保证交付过程和结果的零瑕疵。'
-      },{
-        imgSrc: 'forth-content-img1.png',
-        title: '省心 · 定期保养服务',
-        des: '不仅仅提供专业的家具保养建议，还对柜体产品提供一年一次的上门保养服务'
-      }]
+      pointsList: [],
+      customizedList: []
     }
   },
   mounted(){
@@ -196,7 +161,8 @@ export default {
     .items{
       margin-top: 40px;
       img{
-        width: 100%
+        width: 100%;
+        display: block
       }
       .banner-box{
         position: relative;

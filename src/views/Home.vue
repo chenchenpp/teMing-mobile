@@ -22,22 +22,7 @@ export default {
   name: 'home',
   data(){
     return {
-      carousolList: [{
-        link:'',
-        imgsrc: 'banner1.jpg'
-      },{
-        link:'',
-        imgsrc: 'banner2.jpg'
-      },{
-        link:'',
-        imgsrc: 'banner3.jpg'
-      },{
-        link:'',
-        imgsrc: 'banner4.jpg'
-      },{
-        link:'',
-        imgsrc: 'banner5.jpg'
-      }]
+      carousolList: []
     }
   },
   created(){
@@ -90,6 +75,8 @@ export default {
 .home-content{
   width: 100%;
   margin-top: 60px;
+  padding: 0 20px;
+  box-sizing: border-box;
   .swiper-container{
     width: 100%;
     height: 100%;

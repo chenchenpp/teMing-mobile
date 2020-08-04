@@ -114,23 +114,30 @@ export default {
   computed: {
     menuIcon(){
       return this.isMenu? 'iconfork':'iconego-menu'
-    },
+    }
   },
-  methods: {
-    openMenuHandle(){
-      this.isMenu=!this.isMenu;
-      if(this.isMenu){
-        // 获取当前视口高度
+  watch: {
+    isMenu(newVal){
+      if(newVal){
         let headerHeight=this.$refs.headerRef.clientHeight;
         let ClientHeight=getClientHeight();
         this.$refs.menuContentRef.style.height=(ClientHeight-headerHeight)+'px';
       }else{
         this.$refs.menuContentRef.style.height=""
       }
-
+    }
+  },
+  created(){
+    this.$EventBus.$on('showMenu', (data)=>{
+      this.isMenu= data;
+    });
+  },
+  methods: {
+    openMenuHandle(){
+      this.isMenu=!this.isMenu;
     },
     goRouter(item, data){
-      let path=item.path?`/${item.path}/${data.path}`:`/${data.path}`;
+      let path = item.path ? `/${item.path}/${data.path}` : `/${data.path}`;
       this.$router.push(path)
 
     },

@@ -5,7 +5,7 @@
       <div class="head-banner">
         <div class="swiper-container header-swiper">
           <div class="swiper-wrapper ">
-            <div v-for="(el, index) in pageData.bannerCarouselList" class="swiper-slide" :key="index">
+            <div v-for="(el, index) in pageData.bannerCarouselList" class="swiper-slide" :class="{'swiper-no-swiping': pageData.bannerCarouselList.length==1}" :key="index">
               <img :src="el.imageUrl" alt />
             </div>
           </div>
@@ -49,46 +49,7 @@ import api from '@/util/request/api';
 export default {
   data(){
     return{
-      pageName:this.$route.params.type,
       scrollRevealDom: '.product-main .P-title h1, .P-des, .child-items .h-banner, .child-items .v-banner, .child-items .title, .child-items .info',
-      jiadeData: {
-        carousolList: ['banner1.jpg', 'banner2.jpg', 'banner3.jpg', 'banner4.jpg', 'banner5.jpg'],
-        titleCN: '贾德系列',
-        titleEN: 'Judd series',
-        desCN: '时尚高冷</br>灰白色的主调</br>主流系的配置<br>适合成熟稳重的成功人士 ',
-        desEN: 'Fashionable high cold</br>grey and white tone </br> configuration of mainstream system</br>suitable for mature and stable successful people',
-        childList: [{
-          titleCN: '现代、科技、以人为本',
-          titleEN: 'Modern, science and technology, people-oriented',
-          mesCN: '以西班牙岩板作为主基调</br>打造冷艳大方、时尚高贵</br>电子升降餐桌及德国曙光阁部件的运用</br>使得产品既有轻奢靓丽的外衣</br>又有现代、科技',
-          mesEN: 'Taking Spanish rock plate as the main keynote </br> to create elegant and elegant, fashionable and noble </br> the application of electronic lifting table and German dawn Pavilion components makes the products not only light and luxurious </br>but also modern and technological',
-          imgList: [{
-            imgSrc: ['banner1.jpg', 'banner2.jpg', 'banner3.jpg', 'banner4.jpg', 'banner5.jpg'],
-          },{
-            imgSrc: 'child2.jpg',
-          }]
-        },{
-          titleCN: '古典繁复与现代利落的融合',
-          titleEN:'The fusion of classical complexity and modern neatness',
-          mesCN: '在灯光的氛围下</br>演绎出的是大气且充满质感的轻奢主义</br>它就像冬天里的一张羊绒被</br>能让你得到最温暖的呵护</br>厚薄交错的板片结构</br>与大块面的肤感漆面单轨大移门</br>正是要把这种复杂与简约</br>结合得恰到好处',
-          mesEN: 'In the light atmosphere </br> deduces the atmosphere and full of texture of light luxury doctrine </br> it is like a cashmere quilt in winter </br> it can let you get the most warm care </br> the thickness staggered plate structure </br> and the skin feeling paint monorail sliding door with large surface </br> is to combine this kind of complexity and simplicity properly',
-          imgList: [{
-            imgSrc: ['banner1.jpg', 'banner2.jpg', 'banner3.jpg', 'banner4.jpg', 'banner5.jpg'],
-          },{
-            imgSrc: 'child2.jpg',
-          }]
-        },{
-          titleCN: '全敞开的衣柜墙挂家族',
-          titleEN: 'Fully open wardrobe wall hanging family',
-          mesCN: '在炫酷的灯光烘托下</br>诠释出年轻人灵动跳跃的心</br>让你每天在衣柜空间的时光</br>都犹如在逛时尚的服装店</br>肤感质地的漆面工艺</br>在肌肤与之亲密接触时</br>感受到的将是流水般的丝滑',
-          mesEN: 'In the light atmosphere </br> deduces the atmosphere and full of texture of light luxury doctrine </br> it is like a cashmere quilt in winter </br> it can let you get the most warm care </br> the thickness staggered plate structure </br> and the skin feeling paint monorail sliding door with large surface </br> is to combine this kind of complexity and simplicity properly',
-          imgList: [{
-            imgSrc: ['banner1.jpg', 'banner2.jpg', 'banner3.jpg', 'banner4.jpg', 'banner5.jpg'],
-          },{
-            imgSrc: 'child2.jpg',
-          }]
-        }]
-      },
       pageData: {
         pageTitle: "",
         pageTitleEnglish: '',
@@ -96,11 +57,21 @@ export default {
         pageTitleInfoEnglish: "",
         detailList: [],
         bannerCarouselList: [],
-      },
+      }
     }
   },
   mounted(){
     this.init();
+    this.$once('hook:beforeDestroy', ()=>{
+      this.$EventBus.$off('showMenu');
+
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+   next()
+   this.$EventBus.$emit('showMenu', false);
+   this.init();
+
   },
   methods: {
     init() {
@@ -118,7 +89,6 @@ export default {
         imageBelongPage: allSeries[this.$route.params.type],
         en: 0
       }).then(res => {
-        console.log(res)
         let { pageTitle, pageTitleEnglish, pageTitleInfo, pageTitleInfoEnglish } =res;
         Object.assign(this.pageData, { pageTitle, pageTitleEnglish, pageTitleInfo, pageTitleInfoEnglish });
         let arrList = [...res.arrList];
@@ -132,6 +102,7 @@ export default {
         // 初始化轮播图
         this.$nextTick(() => {
           this.initSwiper();
+          // autoplay: 3000,
           ScrollReveal().reveal(this.scrollRevealDom, ScrollRevealCofig);
           this.pageData.detailList.forEach((item, index)=>{
             //  item.swiper= this.childSwiperhandle(index);
@@ -148,7 +119,6 @@ export default {
 
     },
     checkImageHandle(imgItem, imgIndex) {
-      console.log(imgItem)
       let imgArr;
       if(!Array.isArray(imgItem)){
         imgArr=[imgItem];
@@ -158,7 +128,6 @@ export default {
       imgArr=imgArr.map(data=>{
         return data.imageUrl
       })
-      console.log(imgArr)
       const params = {
         $props: {
           imgs: imgArr,
@@ -175,13 +144,15 @@ export default {
       this.$createImagePreview({ ...params }).show()
     },
     initSwiper() {
-      let homeSwiper = new Swiper(".header-swiper", {
-        autoplay: 3000,
-        loop: true,
+      new Swiper(".header-swiper", {
+        autoplay: this.pageData.bannerCarouselList.length>1?3000:false,
+        loop: this.pageData.bannerCarouselList.length>1?true:false,
         speed: 1000, // 切换速度，slider自动滑动开始到结束的时间单位ms，也是触摸滑动时释放至贴合的时间。
         lazyLoading : true,
         lazyLoadingInPrevNext : true,
         lazyLoadingOnTransitionStart : true,
+        observer: true,
+         noSwiping: true,
       });
     },
     childSwiperhandle(index) {
@@ -212,6 +183,7 @@ export default {
     img{
       width: 100%;
       height: 100%;
+      display: block
     }
   }
   .container{
@@ -258,12 +230,13 @@ export default {
     }
     img{
       width: 100%;
+      display: block
     }
     .h-banner, .v-banner{
       position: relative;
       .magnifier{
         position: absolute;
-        bottom: 0;
+        bottom: 5px;
         width:29px;
         height:30px;
         background:rgba(42,40,42,1);
@@ -281,7 +254,7 @@ export default {
       margin-left: 20px;
       // margin-right: 20px;
       .magnifier{
-         right: 20px;
+         right: 25px;
       }
       .zoom{
         position: absolute;
@@ -350,7 +323,7 @@ export default {
       margin-top: 24px;
       box-sizing: border-box;
       .magnifier{
-         right: 0px;
+         right: 5px;
       }
     }
     .title{

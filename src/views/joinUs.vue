@@ -4,12 +4,12 @@
     <div class="container">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div v-for="(el, index) in carousolList" class="swiper-slide" :key="index">
+          <div v-for="(el, index) in carousolList" class="swiper-slide" :class="{'swiper-no-swiping': carousolList.length==1}" :key="index">
             <img :src="el.imageUrl" alt />
           </div>
         </div>
         <!-- 如果需要分页器 -->
-        <div class="swiper-pagination"></div>
+        <div class="swiper-pagination" v-if="carousolList.length>1"></div>
       </div>
       <ul class="benefit-content">
         <li v-for="(item, index) in benefitList" :key="index">
@@ -46,62 +46,9 @@ export default {
   data(){
     return {
       scrollRevealDom:".joinUs-main .container .title, .joinUs-main .container .des,.benefit-content img,.special-point-content img,.joinUs-main .container .info",
-      carousolList: [{
-        link:'',
-        imgsrc: 'banner1.jpg'
-      },{
-        link:'',
-        imgsrc: 'banner2.jpg'
-      },{
-        link:'',
-        imgsrc: 'banner3.jpg'
-      },{
-        link:'',
-        imgsrc: 'banner4.jpg'
-      },{
-        link:'',
-        imgsrc: 'banner5.jpg'
-      }],
-      benefitList: [{
-        title: '我们的优势',
-        des: '雅居乐，万科，绿地，复兴等地产战略合作',
-        imgsrc: 'img1.png',
-        info: '雅居乐，万科，绿地，复兴等地产战略合作</br>超过100位设计总监级别的合作</br>高坪效，高利润</br>全品类产品支持，超过交货期'
-      },{
-        title: '加入特铭你可以得到什么',
-        des: '全面的经营扶持政策；全维度营销引流和门店运营指导',
-        imgsrc: 'img1.png',
-        info: '全屋定制产品库</br>高定支持，自主研发个性化产品</br>全面的经营扶持政策</br>全维度营销引流和门店运营指导'
-      }],
-      specialPointList: {
-        title: '开业扶持政策',
-        des: '提供经销商年度返利；完善的零售运营培训和产品培训',
-        pointsList: [{
-          imgsrc: 'img1.png',
-          mes: '丰富的全屋定制品牌</br>一个店做全屋'
-        },{
-          imgsrc: 'img1.png',
-          mes: '协助经销商选址'
-        },{
-          imgsrc: 'img1.png',
-          mes: '提供店面设计'
-        },{
-          imgsrc: 'img1.png',
-          mes: '给与店面装修补贴'
-        },{
-          imgsrc: 'img1.png',
-          mes: '协助经销商选品和样品设计'
-        },{
-          imgsrc: 'img1.png',
-          mes: '开店支持和培训'
-        },{
-          imgsrc: 'img1.png',
-          mes: '提供经销商年度返利'
-        },{
-          imgsrc: 'img1.png',
-          mes: '完善的零售运营培训</br>和产品培训'
-        }]
-      }
+      carousolList: [],
+      benefitList: [],
+      specialPointList: {}
     }
   },
   created(){
@@ -124,11 +71,13 @@ export default {
       });
     },
     initSwiper() {
-      let homeSwiper = new Swiper(".swiper-container", {
-        autoplay: 3000,
-        loop: true,
+      new Swiper(".swiper-container", {
+        autoplay: this.carousolList.length>1?3000: false,
+        loop: this.carousolList.length>1?true: false,
         speed: 1000, // 切换速度，slider自动滑动开始到结束的时间单位ms，也是触摸滑动时释放至贴合的时间。
-        pagination : '.swiper-pagination'
+        pagination : '.swiper-pagination',
+        paginationHide:this.carousolList.length>1?true: false,
+        noSwiping: true,
       });
     }
   }
@@ -154,6 +103,7 @@ export default {
     img{
       width: 100%;
       height: 100%;
+      display: block
     }
   }
   ::v-deep .swiper-pagination-bullet{

@@ -11,6 +11,7 @@ function resolve(dir) {
 }
 module.exports = {
   publicPath: '/msite/',
+  outputDir: 'msite',
   css: {
     loaderOptions: {
       sass: {
