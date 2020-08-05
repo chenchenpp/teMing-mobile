@@ -90,7 +90,7 @@ export default {
           path: 'brandStory'
         }]
       },{
-        name: '特铭展厅',
+        name: '探索展厅',
         nameEnglish: 'exhibition hall',
         path: '',
         childrenList: [{

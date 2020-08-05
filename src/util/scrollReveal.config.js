@@ -1,6 +1,6 @@
 export default {
   reset: true,
-  init: true,
+  mobile: true,
   origin: 'right', // 动画开始的方向
   distance: '50px',//动画移动距离
   duration: 1200, // 动画持续时间
