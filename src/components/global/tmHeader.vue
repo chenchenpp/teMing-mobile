@@ -35,75 +35,75 @@ export default {
   name: 'tm-header',
   data(){
     return {
-      menuList: [{
-        name: 'Ê×Ò³',
+        menuList: [{
+        name: 'é¦–é¡µ',
         nameEnglish: 'home',
         path: 'home'
       },{
-        name: '²úÆ·ÖĞĞÄ',
+        name: 'äº§å“ä¸­å¿ƒ',
         nameEnglish: 'Product Center',
         path: 'product',
         childrenList: [{
-          name: '¼ÖµÂÏµÁĞ',
+          name: 'è´¾å¾·ç³»åˆ—',
           nameEnglish: 'Judd Series',
           path: 'jiade'
         },{
-          name: 'ÄªÀ¼µÏÏµÁĞ',
+          name: 'è«å…°è¿ªç³»åˆ—',
           nameEnglish: 'Morandi series',
           path: 'molandi'
         },{
-          name: 'ÃÜË¹ÏµÁĞ',
+          name: 'å¯†æ–¯ç³»åˆ—',
           nameEnglish: 'miss series',
           path: 'miss'
         },{
-          name: 'µÏ¿ËÉ­ÏµÁĞ',
+          name: 'è¿ªå…‹æ£®ç³»åˆ—',
           nameEnglish: 'dikesen series',
           path: 'dikesen'
         },{
-          name: '±È¶ûÏµÁĞ',
+          name: 'æ¯”å°”ç³»åˆ—',
           nameEnglish: 'bier series',
           path: 'bier'
         },{
-          name: '¿ËÌØÁÖÏµÁĞ',
+          name: 'å…‹ç‰¹æ—ç³»åˆ—',
           nameEnglish: 'kelinte series',
           path: 'kelinte'
         },{
-          name: '²¨ÌáÇĞÀûÏµÁĞ',
+          name: 'æ³¢æåˆ‡åˆ©ç³»åˆ—',
           nameEnglish: 'botiqieli series',
           path: 'botiqieli'
         },{
-          name: 'ÃÉµÂÀï°²ÏµÁĞ',
+          name: 'è’™å¾·é‡Œå®‰ç³»åˆ—',
           nameEnglish: 'mengdelian series',
           path: 'mengdelian'
         }]
       },{
-        name: 'Æ·ÅÆ¹ÊÊÂ',
+        name: 'å“ç‰Œæ•…äº‹',
         nameEnglish: 'Brand story',
         path: '',
         childrenList: [{
-          name: '²úÆ·ÌØÉ«',
+          name: 'äº§å“ç‰¹è‰²',
           nameEnglish: 'Product features',
           path: 'brandStory'
         },{
-          name: 'ÎåĞÄ·şÎñ',
+          name: 'äº”å¿ƒæœåŠ¡',
           nameEnglish: 'Five heart service',
           path: 'brandStory'
         }]
       },{
-        name: 'Ì½Ë÷Õ¹Ìü',
+        name: 'æ¢ç´¢å±•å…',
         nameEnglish: 'exhibition hall',
         path: '',
         childrenList: [{
-          name:'ÉÏº£Õ¹Ìü',
+          name:'ä¸Šæµ·å±•å…',
           nameEnglish: 'Shanghai Exhibition Hall',
           path: 'exploreHall'
         }]
       },{
-        name: '¼ÓÈëÎÒÃÇ',
+        name: 'åŠ å…¥æˆ‘ä»¬',
         nameEnglish: 'Join us',
         path: '',
         childrenList: [{
-          name: 'ÆóÒµÈë×¤',
+          name: 'ä¼ä¸šå…¥é©»',
           nameEnglish: 'Enterprise settlement',
           path: 'joinUs'
         }]
