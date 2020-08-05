@@ -226,7 +226,7 @@ export default {
   .child-items{
     text-align: left;
     li{
-      margin-top: 40px;
+      margin-top: 50px;
     }
     img{
       width: 100%;
@@ -331,7 +331,7 @@ export default {
       font-size:19px;
       font-weight:bold;
       color:#333;
-      margin-top: 39px;
+      margin-top: 25px;
     }
     .info{
       margin: 0 20px;
