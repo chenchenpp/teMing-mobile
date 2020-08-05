@@ -2,7 +2,7 @@
   <div class="brandStory-main">
     <tm-header></tm-header>
     <div class="content">
-      <div class="top-video">
+      <div class="top-video scroll-reveal">
         <video-player
           class="video-player vjs-custom-skin"
           ref="videoPlayer"
@@ -13,28 +13,28 @@
         >></video-player>
       </div>
       <div class="characteristic">
-        <h2 class="title">{{pointsList.title}}</h2>
-        <p class="des">{{pointsList.info}}</p>
-        <img class="cha-banner" :src="pointsList.imgArr&&pointsList.imgArr[0].imageUrl" alt="">
+        <h2 class="title scroll-reveal">{{pointsList.title}}</h2>
+        <p class="des scroll-reveal">{{pointsList.info}}</p>
+        <img class="cha-banner scroll-reveal" :src="pointsList.imgArr&&pointsList.imgArr[0].imageUrl" alt="">
         <ul class="point-items">
           <template v-for="(item, index) in pointsList.imgArr">
             <li v-if="index>0" :key="index">
-              <h2 class="name">{{item.imageDescTitle}}</h2>
-              <p class="subtitle">{{item.imageDescription}}</p>
+              <h2 class="name scroll-reveal">{{item.imageDescTitle}}</h2>
+              <p class="subtitle scroll-reveal">{{item.imageDescription}}</p>
             </li>
           </template>
         </ul>
       </div>
       <div class="customized">
-        <h2 class="title">{{customizedList.title}}</h2>
-        <p class="des">{{customizedList.info}}</p>
+        <h2 class="title scroll-reveal">{{customizedList.title}}</h2>
+        <p class="des scroll-reveal">{{customizedList.info}}</p>
         <ul class="items">
           <li v-for="(item, index) in customizedList.imgArr" :key="index">
             <div class="banner-box">
-              <img :src="item.imageUrl" alt="">
-              <span class="title">{{item.imageDescTitle}}</span>
+              <img class="scroll-reveal" :src="item.imageUrl" alt="">
+              <span class="title scroll-reveal">{{item.imageDescTitle}}</span>
             </div>
-            <p class="des">{{item.imageDescription}}</p>
+            <p class="des scroll-reveal">{{item.imageDescription}}</p>
           </li>
         </ul>
       </div>
@@ -49,7 +49,7 @@ import api from '@/util/request/api';
 export default {
   data(){
     return {
-      scrollRevealDom: '.banner-box .title,.brandStory-main .customized .title, .brandStory-main .customized .des,.brandStory-main .characteristic .title, .brandStory-main .characteristic .des,.brandStory-main .content img,.characteristic .name,.characteristic .subtitle',
+      scrollRevealDom: '.scroll-reveal',
       playerOptions: {
         height: "450px",
         playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度

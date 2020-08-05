@@ -2,7 +2,7 @@
   <div class="joinUs-main">
     <tm-header></tm-header>
     <div class="container">
-      <div class="swiper-container">
+      <div class="swiper-container scroll-reveal">
         <div class="swiper-wrapper">
           <div v-for="(el, index) in carousolList" class="swiper-slide" :class="{'swiper-no-swiping': carousolList.length==1}" :key="index">
             <img :src="el.imageUrl" alt />
@@ -13,23 +13,23 @@
       </div>
       <ul class="benefit-content">
         <li v-for="(item, index) in benefitList" :key="index">
-          <p class="title">{{item.mainTitle}}</p>
-          <p class="des">{{item.subTitle}}</p>
-          <img :src="item.imageUrl" alt="">
-          <p class="info" v-html="item.imageDescription"></p>
+          <p class="title scroll-reveal">{{item.mainTitle}}</p>
+          <p class="des scroll-reveal">{{item.subTitle}}</p>
+          <img class="scroll-reveal" :src="item.imageUrl" alt="">
+          <p class="info scroll-reveal" v-html="item.imageDescription"></p>
         </li>
       </ul>
       <div class="special-point-content">
-        <p class="title">{{specialPointList.title}}</p>
-        <p class="des">{{specialPointList.info}}</p>
+        <p class="title scroll-reveal">{{specialPointList.title}}</p>
+        <p class="des scroll-reveal">{{specialPointList.info}}</p>
         <ul class="special-items">
           <li v-for="(item, index) in specialPointList.imgArr" :key="index">
-            <img :src="item.imageUrl" alt="">
-            <p class="info" v-html="item.imageDescription"></p>
+            <img class="scroll-reveal" :src="item.imageUrl" alt="">
+            <p class="info scroll-reveal" v-html="item.imageDescription"></p>
           </li>
         </ul>
       </div>
-      <div class="fileProcessing">
+      <div class="fileProcessing scroll-reveal">
         <cube-button :outline="true" :inline="true">加盟文档 · 下载</cube-button>
         <cube-button :outline="true"  :inline="true">上传 · 加盟文档</cube-button>
       </div>
@@ -45,7 +45,7 @@ import ScrollRevealCofig from '@/util/scrollReveal.config'
 export default {
   data(){
     return {
-      scrollRevealDom:".joinUs-main .container .title, .joinUs-main .container .des,.benefit-content img,.special-point-content img,.joinUs-main .container .info",
+      scrollRevealDom:".scroll-reveal",
       carousolList: [],
       benefitList: [],
       specialPointList: {}
@@ -66,7 +66,7 @@ export default {
         // 初始化轮播图
         this.$nextTick(() => {
           this.initSwiper();
-           ScrollReveal().reveal(this.scrollRevealDom, ScrollRevealCofig);
+          ScrollReveal().reveal(this.scrollRevealDom, ScrollRevealCofig);
         });
       });
     },

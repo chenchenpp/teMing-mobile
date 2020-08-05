@@ -4,11 +4,11 @@
     <div class="content">
       <div class="area-explore-item" v-for="(item, index) in exploreHallList" :key="index">
         <div class="explore-box">
-          <img class="explore-banner" :src="item.imageUrl" alt="">
+          <img class="explore-banner scroll-reveal" :src="item.imageUrl" alt="">
           <a class="enter-explore" :href="item.linkUrl"></a>
         </div>
-        <p class="title">{{item.imageDescTitle}}</p>
-        <p class="dress" v-html="item.imageDescription"></p>
+        <p class="title scroll-reveal">{{item.imageDescTitle}}</p>
+        <p class="dress scroll-reveal" v-html="item.imageDescription"></p>
       </div>
     </div>
     <tm-footer class="footer"></tm-footer>
@@ -21,7 +21,7 @@ import api from '@/util/request/api';
 export default {
   data(){
     return {
-      scrollRevealDom:".area-explore-item img,.area-explore-item .title,.area-explore-item .dress",
+      scrollRevealDom:".scroll-reveal",
       exploreHallList: []
     }
   },

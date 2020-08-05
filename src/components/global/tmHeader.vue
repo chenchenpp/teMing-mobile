@@ -105,7 +105,7 @@ export default {
         childrenList: [{
           name: '企业入驻',
           nameEnglish: 'Enterprise settlement',
-          path: 'joinUs'
+          path: 'JoinUs'
         }]
       }],
       isMenu: false,
