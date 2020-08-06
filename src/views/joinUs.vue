@@ -13,19 +13,19 @@
       </div>
       <ul class="benefit-content">
         <li v-for="(item, index) in benefitList" :key="index">
-          <p class="title scroll-reveal">{{item.mainTitle}}</p>
-          <p class="des scroll-reveal">{{item.subTitle}}</p>
+          <p class="title scroll-reveal">{{item[`mainTitle${language}`] }}</p>
+          <p class="des scroll-reveal">{{item[`subTitle${language}`]}}</p>
           <img class="scroll-reveal" :src="item.imageUrl" alt="">
-          <p class="info scroll-reveal" v-html="item.imageDescription"></p>
+          <p class="info scroll-reveal" v-html="item[`imageDescription${language}`]"></p>
         </li>
       </ul>
       <div class="special-point-content">
-        <p class="title scroll-reveal">{{specialPointList.title}}</p>
-        <p class="des scroll-reveal">{{specialPointList.info}}</p>
+        <p class="title scroll-reveal">{{specialPointList[`title${language}`]}}</p>
+        <p class="des scroll-reveal">{{specialPointList[`info${language}`]}}</p>
         <ul class="special-items">
           <li v-for="(item, index) in specialPointList.imgArr" :key="index">
             <img class="scroll-reveal" :src="item.imageUrl" alt="">
-            <p class="info scroll-reveal" v-html="item.imageDescription"></p>
+            <p class="info scroll-reveal" v-html="item[`imageDescription${language}`]"></p>
           </li>
         </ul>
       </div>

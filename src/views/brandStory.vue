@@ -13,28 +13,28 @@
         >></video-player>
       </div>
       <div class="characteristic">
-        <h2 class="title scroll-reveal">{{pointsList.title}}</h2>
-        <p class="des scroll-reveal">{{pointsList.info}}</p>
+        <h2 class="title scroll-reveal">{{pointsList[`title${language}`]}}</h2>
+        <p class="des scroll-reveal">{{pointsList[`info${language}`]}}</p>
         <img class="cha-banner scroll-reveal" :src="pointsList.imgArr&&pointsList.imgArr[0].imageUrl" alt="">
         <ul class="point-items">
           <template v-for="(item, index) in pointsList.imgArr">
             <li v-if="index>0" :key="index">
-              <h2 class="name scroll-reveal">{{item.imageDescTitle}}</h2>
-              <p class="subtitle scroll-reveal">{{item.imageDescription}}</p>
+              <h2 class="name scroll-reveal">{{item[`imageDescTitle${language}`]}}</h2>
+              <p class="subtitle scroll-reveal">{{item[`imageDescription${language}`]}}</p>
             </li>
           </template>
         </ul>
       </div>
       <div class="customized">
-        <h2 class="title scroll-reveal">{{customizedList.title}}</h2>
-        <p class="des scroll-reveal">{{customizedList.info}}</p>
+        <h2 class="title scroll-reveal">{{customizedList[`title${language}`]}}</h2>
+        <p class="des scroll-reveal">{{customizedList[`info${language}`]}}</p>
         <ul class="items">
           <li v-for="(item, index) in customizedList.imgArr" :key="index">
             <div class="banner-box">
               <img class="scroll-reveal" :src="item.imageUrl" alt="">
-              <span class="title scroll-reveal">{{item.imageDescTitle}}</span>
+              <span class="title scroll-reveal">{{item[`imageDescTitle${language}`]}}</span>
             </div>
-            <p class="des scroll-reveal">{{item.imageDescription}}</p>
+            <p class="des scroll-reveal">{{item[`imageDescription${language}`]}</p>
           </li>
         </ul>
       </div>

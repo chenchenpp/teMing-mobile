@@ -7,8 +7,8 @@
           <img class="explore-banner scroll-reveal" :src="item.imageUrl" alt="">
           <a class="enter-explore" :href="item.linkUrl"></a>
         </div>
-        <p class="title scroll-reveal">{{item.imageDescTitle}}</p>
-        <p class="dress scroll-reveal" v-html="item.imageDescription"></p>
+        <p class="title scroll-reveal">{{item[`imageDescTitle${language}`]}}</p>
+        <p class="dress scroll-reveal" v-html="item[`imageDescription${language}`]"></p>
       </div>
     </div>
     <tm-footer class="footer"></tm-footer>

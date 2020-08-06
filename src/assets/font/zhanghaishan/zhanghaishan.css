@@ -2,9 +2,9 @@
 
 @font-face {
   font-family: "zhanghaishan";
-  src: url("zhanghaishan.woff2") format("woff2"),
+  src: url("zhanghaishan.ttf") format("truetype"),
+       url("zhanghaishan.woff2") format("woff2"),
        url("zhanghaishan.woff") format("woff"),
-       /* url("zhanghaishan.ttf") format("truetype"), */
        url("zhanghaishan.eot") format("embedded-opentype");
        /* url("zhanghaishan.svg") format("svg"); */
   font-weight: normal;
