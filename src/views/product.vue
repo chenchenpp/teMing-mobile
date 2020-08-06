@@ -3,7 +3,7 @@
     <tm-header></tm-header>
     <div class="container">
       <div class="head-banner">
-        <div class="swiper-container header-swiper">
+        <div class="swiper-container header-swiper scroll-reveal">
           <div class="swiper-wrapper ">
             <div v-for="(el, index) in pageData.bannerCarouselList" class="swiper-slide" :class="{'swiper-no-swiping': pageData.bannerCarouselList.length==1}" :key="index">
               <img :src="el.imageUrl" alt />
@@ -11,13 +11,13 @@
           </div>
         </div>
         <div class="P-title">
-          <h1>{{pageData[`pageTitle${language}`]}}</h1>
+          <h1 class="scroll-reveal" >{{pageData[`pageTitle${language}`]}}</h1>
         </div>
       </div>
-      <p class="P-des" v-html="pageData[`pageTitleInfo${language}`]" data-scroll-reveal></p>
+      <p class="P-des scroll-reveal" v-html="pageData[`pageTitleInfo${language}`]" data-scroll-reveal></p>
       <ul class="child-items">
         <li v-for="(item, index) in pageData.detailList" :key="index">
-          <div class="h-banner">
+          <div class="h-banner scroll-reveal">
             <div class="swiper-container" :class="`child-swiper-container${index}`">
               <div class="swiper-wrapper">
                 <div v-for="(imgData, imgDataIndex) in item.imgArr" class="swiper-slide" :key="imgDataIndex">
@@ -29,12 +29,12 @@
             </div>
             <i class="iconfont iconfangdajing magnifier" @click="checkImageHandle(item.imgArr, imgIndex)"></i>
           </div>
-          <div class="v-banner">
+          <div class="v-banner scroll-reveal">
             <img :src="item.vImagArr.imageUrl" alt="">
             <i class="iconfont iconfangdajing magnifier" @click="checkImageHandle(item.vImagArr)"></i>
           </div>
-          <p class="title" data-scroll-reveal>{{item[`title${language}`]}}</p>
-          <p class="info" v-html="item[`info${language}`]" data-scroll-reveal></p>
+          <p class="title scroll-reveal" data-scroll-reveal>{{item[`title${language}`]}}</p>
+          <p class="info scroll-reveal"  v-html="item[`info${language}`]" data-scroll-reveal></p>
         </li>
       </ul>
     </div>
@@ -49,7 +49,7 @@ import api from '@/util/request/api';
 export default {
   data(){
     return{
-      scrollRevealDom: '.product-main .P-title h1, .P-des, .child-items .h-banner, .child-items .v-banner, .child-items .title, .child-items .info',
+      scrollRevealDom: '.scroll-reveal',
       pageData: {
         pageTitle: "",
         pageTitleEnglish: '',
@@ -67,11 +67,18 @@ export default {
 
     })
   },
-  beforeRouteUpdate (to, from, next) {
-   next()
-   this.$EventBus.$emit('showMenu', false);
-   this.init();
+  // beforeRouteUpdate (to, from, next) {
+  //   next()
+  //   this.init();
+  //   this.$EventBus.$emit('showMenu', false);
 
+  // },
+  watch: {
+    '$route': function(to, from) {
+      // next()
+      this.init();
+      this.$EventBus.$emit('showMenu', false);
+    }
   },
   methods: {
     init() {
@@ -107,10 +114,8 @@ export default {
         // 初始化轮播图
         this.$nextTick(() => {
           this.initSwiper();
-          // autoplay: 3000,
           ScrollReveal().reveal(this.scrollRevealDom, ScrollRevealCofig);
           this.pageData.detailList.forEach((item, index)=>{
-            //  item.swiper= this.childSwiperhandle(index);
             this.$set(item,'swiperHandle',this.childSwiperhandle(index))
           })
         });
@@ -232,7 +237,7 @@ export default {
   .child-items{
     text-align: left;
     li{
-      margin-top: 40px;
+      margin-top: 50px;
     }
     img{
       width: 100%;
@@ -337,7 +342,7 @@ export default {
       font-size:19px;
       font-weight:bold;
       color:#333;
-      margin-top: 39px;
+      margin-top: 25px;
     }
     .info{
       margin: 0 20px;

@@ -34,7 +34,7 @@
               <img class="scroll-reveal" :src="item.imageUrl" alt="">
               <span class="title scroll-reveal">{{item[`imageDescTitle${language}`]}}</span>
             </div>
-            <p class="des scroll-reveal">{{item[`imageDescription${language}`]}</p>
+            <p class="des scroll-reveal">{{item[`imageDescription${language}`]}}</p>
           </li>
         </ul>
       </div>
