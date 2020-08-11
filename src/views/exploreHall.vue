@@ -83,7 +83,7 @@ export default {
   .title{
     margin-top: 20px;
     font-size: 17px;
-    font-weight: bold;
+    // font-weight: bold;
     color: #333333;
     text-align: left
   }

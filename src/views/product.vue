@@ -57,6 +57,7 @@ export default {
         pageTitleInfoEnglish: "",
         detailList: [],
         bannerCarouselList: [],
+        productSwiper: null
       }
     }
   },
@@ -67,18 +68,11 @@ export default {
 
     })
   },
-  // beforeRouteUpdate (to, from, next) {
-  //   next()
-  //   this.init();
-  //   this.$EventBus.$emit('showMenu', false);
-
-  // },
-  watch: {
-    '$route': function(to, from) {
-      // next()
-      this.init();
-      this.$EventBus.$emit('showMenu', false);
-    }
+  beforeRouteUpdate (to, from, next) {
+    next()
+    this.init();
+     window.scrollTo(0, 0)
+    this.$EventBus.$emit('showMenu', false);
   },
   methods: {
     init() {
@@ -126,7 +120,6 @@ export default {
         return
       }
       data.swiperHandle.slideNext();
-
     },
     checkImageHandle(imgItem, imgIndex) {
       let imgArr;
@@ -154,7 +147,11 @@ export default {
       this.$createImagePreview({ ...params }).show()
     },
     initSwiper() {
-      new Swiper(".header-swiper", {
+      if(this.productSwiper){
+        this.productSwiper.init();
+        return
+      }
+      this.productSwiper=new Swiper(".header-swiper", {
         autoplay: this.pageData.bannerCarouselList.length>1?3000:false,
         loop: this.pageData.bannerCarouselList.length>1?true:false,
         speed: 1000, // 切换速度，slider自动滑动开始到结束的时间单位ms，也是触摸滑动时释放至贴合的时间。
@@ -181,6 +178,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.scroll-reveal{
+  visibility: hidden;
+}
 .product-main{
   // position: absolute;
   // top: 0;
@@ -211,7 +211,7 @@ export default {
       width: 180px;
       height: 50px;
       font-size:30px;
-      font-weight:bold;
+      // font-weight:bold;
       color:#333;
       background: linear-gradient(rgba($color: #ffffff, $alpha: .5),#ffffff, #ffffff);
       bottom: 0;
@@ -228,7 +228,7 @@ export default {
     margin: 0 20px;
     margin-top: 26px;
     font-size:12px;
-    font-weight:bold;
+    // font-weight:bold;
     color: #676666;
     line-height:22px;
     text-align: left;
@@ -340,7 +340,7 @@ export default {
     .title{
       margin: 0 20px;
       font-size:19px;
-      font-weight:bold;
+      // font-weight:bold;
       color:#333;
       margin-top: 25px;
     }

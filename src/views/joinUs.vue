@@ -123,7 +123,7 @@ export default {
     }
     .title{
       font-size:19px;
-      font-weight:bold;
+      // font-weight:bold;
       color:#333333
     }
     .des{
@@ -148,7 +148,7 @@ export default {
     margin-top: 40px;
     .title{
       font-size:19px;
-      font-weight:bold;
+      // font-weight:bold;
       color:rgba(51,51,51,1);
     }
     .des{

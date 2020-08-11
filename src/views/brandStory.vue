@@ -119,7 +119,7 @@ export default {
   }
   .title{
     font-size:20px;
-    font-weight:bold;
+    // font-weight:bold;
     color: #333333;
   }
   .des{
@@ -144,7 +144,7 @@ export default {
       }
       .name{
         font-size: 17px;
-        font-weight:bold;
+        // font-weight:bold;
         color:rgba(51,51,51,1);
         line-height:19px;
       }
@@ -174,7 +174,7 @@ export default {
           line-height: 35px;
           text-align: center;
           font-size:17px;
-          font-weight:bold;
+          // font-weight:bold;
           color:rgba(51,51,51,1);
           position: absolute;
           bottom: 0;
