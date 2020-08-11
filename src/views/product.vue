@@ -10,8 +10,8 @@
             </div>
           </div>
         </div>
-        <div class="P-title">
-          <h1 class="scroll-reveal" >{{pageData[`pageTitle${language}`]}}</h1>
+        <div class="scroll-reveal P-title">
+          <h1>{{pageData[`pageTitle${language}`]}}</h1>
         </div>
       </div>
       <p class="P-des scroll-reveal" v-html="pageData[`pageTitleInfo${language}`]" data-scroll-reveal></p>
@@ -182,12 +182,6 @@ export default {
 
 <style lang="scss" scoped>
 .product-main{
-  // position: absolute;
-  // top: 0;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
-  // overflow-y: auto;
   .swiper-container{
     width: 100%;
     height: 100%;
@@ -261,9 +255,7 @@ export default {
       }
     }
     .h-banner{
-      // width: 100%;
       margin-left: 20px;
-      // margin-right: 20px;
       .magnifier{
          right: 25px;
       }
@@ -282,41 +274,27 @@ export default {
       }
       .swiper-slide-prev{
         .zoom{
-          // width: 60px;
-          // height: 75px;
-          // position: absolute;
-          // left: -150px;
-          // top: 16px;
-          // z-index: 100;
           transform: scale(.3);
           transform-origin: left top;
-          // transition-delay: 300ms;
         }
       }
       .swiper-slide-next{
         .zoom{
-          // width: 60px;
-          // height: 75px;
-
+          border: 3PX solid #ffffff;
           left: -110px;
           top: 16px;
           z-index: 100;
           transform: scale(.3);
           transform-origin: left top;
-          // transition-delay: 100ms;
         }
       }
       .swiper-slide-next+.swiper-slide{
         .zoom{
-          // width: 60px;
-          // height: 75px;
-
           left: -230px;
           top: 16px;
           z-index: 100;
           transform: scale(1);
           transform-origin: left top;
-          // transition-delay: 100ms;
         }
       }
       .swiper-slide-active{
@@ -326,7 +304,6 @@ export default {
           top: 0;
           transform-origin: left top;
         }
-        // transition: transform 2s ease
       }
     }
     .v-banner{
