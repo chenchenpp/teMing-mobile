@@ -3,7 +3,7 @@
     <tm-header></tm-header>
     <div class="container">
       <div class="head-banner">
-        <div class="swiper-container header-swiper scroll-reveal">
+        <div class="swiper-container header-swiper">
           <div class="swiper-wrapper ">
             <div v-for="(el, index) in pageData.bannerCarouselList" class="swiper-slide" :class="{'swiper-no-swiping': pageData.bannerCarouselList.length==1}" :key="index">
               <img :src="el.imageUrl" alt />
@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     init() {
+      this.bannerCarouselList=[];
       const toast = this.$createToast({
         mask: true
       })
@@ -178,9 +179,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.scroll-reveal{
-  visibility: hidden;
-}
 .product-main{
   .swiper-container{
     width: 100%;
