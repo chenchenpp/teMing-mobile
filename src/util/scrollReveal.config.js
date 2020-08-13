@@ -6,8 +6,7 @@ export default {
   duration: 1200, // 动画持续时间
   opacity: 0, // 初始透明度
   easing: 'ease-in-out',
-  useDelay: 'once',
-  cleanup: true,
+  viewFactor: 0.1,
   viewOffset: {//动画可视区域
     top: 160,
     right: 0,

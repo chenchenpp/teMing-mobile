@@ -176,6 +176,7 @@ export default {
   height: 0;
   overflow: hidden;
   transition: height .7s ease-in-out;
+  z-index: 1000;
    ::v-deep .cube-scroll-content{
      display: inline-block
    }
