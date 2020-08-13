@@ -3,11 +3,7 @@
     <tm-header></tm-header>
     <div class="container">
       <div class="head-banner">
-<<<<<<< HEAD
-        <div class="swiper-container header-swiper">
-=======
         <div class="swiper-container header-swiper ">
->>>>>>> 678b406a32123a9a323c6ac75b3b749334dc6d2a
           <div class="swiper-wrapper ">
             <div v-for="(el, index) in pageData.bannerCarouselList" class="swiper-slide" :class="{'swiper-no-swiping': pageData.bannerCarouselList.length==1}" :key="index">
               <img :src="el.imageUrl" alt />
