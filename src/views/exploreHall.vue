@@ -4,11 +4,11 @@
     <div class="content">
       <div class="area-explore-item" v-for="(item, index) in exploreHallList" :key="index">
         <div class="explore-box">
-          <img class="explore-banner scroll-reveal" :src="item.imageUrl" alt="">
+          <img class="explore-banner" :src="item.imageUrl" alt="">
           <a class="enter-explore" :href="item.linkUrl"></a>
         </div>
-        <p class="title scroll-reveal">{{item[`imageDescTitle${language}`]}}</p>
-        <p class="dress scroll-reveal" v-html="item[`imageDescription${language}`]"></p>
+        <p class="title">{{item[`imageDescTitle${language}`]}}</p>
+        <p class="dress" v-html="item[`imageDescription${language}`]"></p>
       </div>
     </div>
     <tm-footer class="footer"></tm-footer>

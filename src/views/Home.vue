@@ -84,6 +84,7 @@ export default {
   img{
     width: 100%;
     height: 100%;
+    display: block;
   }
   ::v-deep .swiper-pagination-bullet{
     width: 25px;
