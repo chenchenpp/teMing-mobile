@@ -27,7 +27,7 @@
                 </div>
               </div>
             </div>
-            <i class="iconfont iconfangdajing magnifier" @click="checkImageHandle(item.imgArr, imgIndex)"></i>
+            <i class="iconfont iconfangdajing magnifier" @click="checkImageHandle(item.imgArr, item.imgIndex)"></i>
           </div>
           <div class="v-banner scroll-reveal">
             <img :src="item.vImagArr.imageUrl" alt="">
@@ -57,7 +57,7 @@ export default {
         pageTitleInfoEnglish: "",
         detailList: [],
         bannerCarouselList: [],
-        productSwiper: null
+        productSwiper: null,
       }
     }
   },
@@ -77,6 +77,7 @@ export default {
   methods: {
     init() {
       this.bannerCarouselList=[];
+      this.pageData.detailList=[];
       const toast = this.$createToast({
         mask: true
       })
@@ -104,6 +105,7 @@ export default {
         // 主体部分
         this.pageData.detailList = arrList.splice(0, res.arrList.length - 1);
         this.pageData.detailList.forEach(item=>{
+          item.imgIndex=0;
           item.vImagArr=item.imgArr.pop();
         })
         // 初始化轮播图
@@ -111,12 +113,18 @@ export default {
           this.initSwiper();
           ScrollReveal().reveal(this.scrollRevealDom, ScrollRevealCofig);
           this.pageData.detailList.forEach((item, index)=>{
-            this.$set(item,'swiperHandle',this.childSwiperhandle(index))
+            if(item.swiperHandle){
+              item.swiperHandle.init();
+            }else{
+              this.$set(item,'swiperHandle',this.childSwiperhandle(item,index))
+            }
+
           })
         });
       });
     },
     nextImagesHandle(data, index){
+      data.imgIndex=index;
       if(data.swiperHandle.activeIndex==index){
         return
       }
@@ -164,7 +172,7 @@ export default {
         noSwiping: true,
       });
     },
-    childSwiperhandle(index) {
+    childSwiperhandle(item,index) {
       let className=".child-swiper-container"+index
       let childSwiper= new Swiper(className, {
         autoplayStopOnLast: true,
