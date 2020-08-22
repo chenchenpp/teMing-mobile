@@ -5,7 +5,7 @@
         <i class="iconfont" :class="[data.iconfont]"></i>
       </li>
     </ul>
-    <p class="tm-address">{{address[`info${language}`]}}</p>
+    <p class="tm-address" v-html="address[`info${language}`]"></p>
   </div>
 </template>
 <script>
@@ -14,7 +14,7 @@ export default {
   data(){
     return {
       address: {
-        info: 'Copyright @2010 - 2020上海特铭家具有限公司  沪ICP备19034031号-1',
+        info: 'Copyright @2010 - 2020上海特铭家具有限公司  沪ICP备19034031号-1</br> 沪公网安备 31011402008858号',
         infoEnglish: 'Copyright @ 2010-2020 Shanghai TeMing Furniture Co., Ltd. huicp No. 19034031-1',
       },
       contactList: [{
