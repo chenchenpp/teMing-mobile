@@ -98,16 +98,18 @@ export default {
           nameEnglish: 'Shanghai Exhibition Hall',
           path: 'exploreHall'
         }]
-      },{
-        name: '加入我们',
-        nameEnglish: 'Join us',
-        path: '',
-        childrenList: [{
-          name: '企业入驻',
-          nameEnglish: 'Enterprise settlement',
-          path: 'JoinUs'
-        }]
-      }],
+      }
+      // ,{
+      //   name: '加入我们',
+      //   nameEnglish: 'Join us',
+      //   path: '',
+      //   childrenList: [{
+      //     name: '企业入驻',
+      //     nameEnglish: 'Enterprise settlement',
+      //     path: 'JoinUs'
+      //   }]
+      // }
+      ],
       isMenu: false,
     }
   },
