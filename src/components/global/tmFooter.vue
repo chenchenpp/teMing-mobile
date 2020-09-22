@@ -9,12 +9,14 @@
   </div>
 </template>
 <script>
+
 export default {
   name:'tm-footer',
   data(){
+    let pliceImg= require('@/assets/images/police.png');
     return {
       address: {
-        info: 'Copyright @2010 - 2020上海特铭家具有限公司  沪ICP备19034031号-1</br> 沪公网安备 31011402008858号',
+        info: `Copyright @2010 - 2020上海特铭家具有限公司  沪ICP备19034031号-1</br> <img width="12px" src='${pliceImg}' alt=""> 沪公网安备 31011402008858号`,
         infoEnglish: 'Copyright @ 2010-2020 Shanghai TeMing Furniture Co., Ltd. huicp No. 19034031-1',
       },
       contactList: [{
