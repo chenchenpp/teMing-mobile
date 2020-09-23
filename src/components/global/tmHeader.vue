@@ -22,10 +22,10 @@
           </li>
         </ul>
       </cube-scroll>
-      <!-- <div class="turn-trans">
+      <div class="turn-trans">
         <span class="china" :class="{'active': language=='CN'}" @click="changeLoacle('CN')">CN</span> |
         <span class="english" :class="{'active': language=='EN'}" @click="changeLoacle('EN')">EN</span>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
